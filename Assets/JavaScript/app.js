@@ -2,6 +2,8 @@
 // --------------------------------------------------------------------------------------------------
 var timeLeft = 60
 var timer;
+var numberRight;
+var numberWrong;
 
 
 
@@ -9,6 +11,8 @@ var timer;
 // --------------------------------------------------------------------------------------------------
 //Starts game, unhides questions, hides start button, starts timer
 function startGame(){
+    numberRight = 0;
+    numberWrong = 0;
     $("#start-phrase").hide();
     $("#quiz-questions").show();
     runTimer();
@@ -22,6 +26,7 @@ function runTimer(){
 //Hides questions before START is clicked
 function hideQuestions(){
     $("#quiz-questions").hide();
+    $(".results").hide();
 
 }
 
@@ -36,6 +41,48 @@ function countdown(){
 
 
 function finishGame (){
+    
+    var q1 = $("#question-1").serializeArray()[0].value;
+    var q2 = $("#question-2").serializeArray()[0].value;
+    var q3 = $("#question-3").serializeArray()[0].value;
+    var q4 = $("#question-4").serializeArray()[0].value;
+    var q5 = $("#question-5").serializeArray()[0].value;
+
+    if (q1 == "Nirvana"){
+        numberRight++
+    }
+    else {
+        numberWrong++
+    }
+    if (q2 == "Third Eye Blind"){
+        numberRight++
+    }
+    else {
+        numberWrong++
+    }
+    if (q3 == "Alice In Chains"){
+        numberRight++
+    }
+    else {
+        numberWrong++
+    }
+    if (q4 == "Stone Temple Pilots"){
+        numberRight++
+    }
+    else {
+        numberWrong++
+    }
+    if (q5 == "Eddie Vedder"){
+        numberRight++
+    }
+    else {
+        numberWrong++
+    }
+
+    $("#right").html(numberRight);
+    $("#wrong").html(numberWrong);
+    console.log(numberRight, numberWrong);
+    $(".results").show();
 
 }
 
@@ -51,9 +98,13 @@ $("#start-button").on("click", function(){
 })
 
 $("#submit-button").on("click", function(){
+    $(".main-container").hide();
     finishGame();
 })
 
+$("#reset-button").on("click", function(){
+    startGame();
+})
 
 
 //NEED TO CREAT FINISHGAME FUNCTION AND HTML/JQUERY FOR POPULATING RESULTS AND RESTART BUTTON
