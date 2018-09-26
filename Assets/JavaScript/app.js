@@ -13,8 +13,10 @@ var numberWrong;
 function startGame(){
     numberRight = 0;
     numberWrong = 0;
+    timeLeft = 60;
     $("#start-phrase").hide();
     $("#quiz-questions").show();
+    $(".results").hide();
     runTimer();
 }
 
@@ -41,6 +43,8 @@ function countdown(){
 
 
 function finishGame (){
+
+    clearTimeout(timer);
     
     var q1 = $("#question-1").serializeArray()[0].value;
     var q2 = $("#question-2").serializeArray()[0].value;
@@ -98,13 +102,16 @@ $("#start-button").on("click", function(){
 })
 
 $("#submit-button").on("click", function(){
-    $(".main-container").hide();
+    $("#quiz-questions").hide();
     finishGame();
 })
 
 $("#reset-button").on("click", function(){
+    $("#question-1").trigger("reset");
+    $("#question-2").trigger("reset");
+    $("#question-3").trigger("reset");
+    $("#question-4").trigger("reset");
+    $("#question-5").trigger("reset");
     startGame();
 })
 
-
-//NEED TO CREAT FINISHGAME FUNCTION AND HTML/JQUERY FOR POPULATING RESULTS AND RESTART BUTTON
